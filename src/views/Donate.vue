@@ -19,7 +19,7 @@
             Longmont, CO 80503
           </div>
           <div class="row card-text mb-2">Receipts will be mailed within
-            6 weeks after the donation
+            6 weeks after your donation
             is processed.
           </div>
         </div>
