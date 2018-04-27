@@ -31,7 +31,7 @@ export default {
     mapViewingArea: {},
     dashboardWorksites: {
       offset: 0,
-      limit: 4,
+      limit: 10,
       worksites: []
     },
     worksiteStats: {

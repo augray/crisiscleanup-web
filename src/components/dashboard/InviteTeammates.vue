@@ -2,11 +2,11 @@
   <div>
     <p>{{ $t('inviteTeammates.invite_teammates_instructions') }}</p>
     <div class="form-group">
-      <input type="text" v-model="invitees"
+        <input type="text" v-model="invitees"
              :state="formErrors && formErrors.hasOwnProperty('test') ? false : null"
              placeholder="i.e. john@example.com, jane@example.com, steve@example.com" id="emails-to-send"/>
-      <div v-show="formErrors" class="invalid-feedback">{{errorMessage}}</div>
-      <!-- <div v-show="successfulInvites" class="success">{{ $t('inviteTeammates.invites_sent_success') }}</div>
+      <!--<div v-show="formErrors" class="invalid-feedback">{{errorMessage}}</div>
+      <div v-show="successfulInvites" class="success">{{ $t('inviteTeammates.invites_sent_success') }}</div>
       -->
     </div>
     <br/>
