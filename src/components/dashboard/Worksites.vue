@@ -92,7 +92,7 @@
 -->
 
 <template>
-  <div class="animated fadeIn">
+  <div class="animated">
     <div class="card">
 
       <b-card no-body>
