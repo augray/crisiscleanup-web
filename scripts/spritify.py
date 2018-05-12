@@ -1,4 +1,8 @@
 import argparse
+import json
+import math
+import sys
+import traceback
 from os import listdir, makedirs
 from os.path import isfile, splitext, basename
 from os.path import join as path_join
@@ -11,13 +15,36 @@ class SpriteGenerator(object):
     """
     SUPPORTED_ICON_FORMATS = [".png"]
     
-    def __init__(self):
-        pass
+    """
+    Pixels in icons are pretty much in one of two
+    states (ignoring overlays), on and of the same
+    color as all other "on" pixels, or transparent.
+    We try to bin pixels into one of these two 
+    categories by looking at the value of the alpha
+    channel, and this is the magnitide at which a pixel
+    is considered "on"
+    """
+    ALPHA_CHANNEL_THRESHOLD = 75
+    
+    def __init__(self, image_definition_json, closed_base_image, **kwargs):
+        self._image_definition_json = image_definition_json
+        self._closed_base_image = closed_base_image
+        self._excluded_paths = set(kwargs.get("excluded_paths", []))
+        self._indicators = kwargs["indicators"]
+    
+    def _convert_to_hsv_alpha(self, indicator):
+        r, g, b, a = indicator.convert("RGBA").split()
+        indicator = Image.merge("RGB", (r, g, b)).convert("HSV")
+        
+        return indicator, a
     
     def _get_icons_to_transform(self, source_directory):
-        #TODO: if sprite exists for an icon, exclude it
-        return _list_files_with_extensions(source_directory,
+        """
+        Returns the paths for the icons to generate sprites from
+        """
+        all_paths =  _list_files_with_extensions(source_directory,
                                            SpriteGenerator.SUPPORTED_ICON_FORMATS)
+        return [p for p in all_paths if p not in self._excluded_paths]
     
     def generate_from_directory(self, source_directory):
         """
@@ -45,8 +72,8 @@ class SpriteGenerator(object):
             file_name = path_join(sprite_directory, source_name+"-"+icon_class+".png")
             try:
                 sprite_icon.save(file_name)
-            except IOError as e:
-                e.print_exc()
+            except IOError:
+                traceback.print_exc()
                 print("cannot convert icon '{}' with icon class '{}'".format(source_name,icon_class))
 
     
@@ -75,10 +102,7 @@ class SpriteGenerator(object):
         specifies how the corresponding source icon should be changed
         to produce the sprite icon for that sprite icon class.
         """
-        return {
-            "Thing1" : {"hue-rotation" : 150, "grayscale" : True},
-            "Thing2" : {"hue-rotation" : -150, "grayscale" : False}
-            }
+        return self._image_definition_json
     
     def _apply_transforms(self, hsv_icon, alpha_channel, transform_config):
         """
@@ -87,18 +111,27 @@ class SpriteGenerator(object):
         For instance, for a specific status/claim state/age the hue might
         need to be rotated by x, the transparency changed by y, etc.
         """
-        transforms = {
-            "hue-rotation" : self._rotate_hue,
-            "grayscale" : self._make_grayscale
-            }
-        for transform_key, transform_value in transform_config.items():
-            if transform_key not in transforms:
+        transforms = [
+                ("use-closed-base", self._use_closed_base),
+                ("color", self._set_color),
+                ("hue-rotate", self._rotate_hue),
+                ("grayscale", self._make_grayscale),
+                ("opacity", self._set_opacity)
+            ]
+        for transform_key, transform_func in transforms:
+            if transform_func is None:
                 continue
-            hsv_icon = transforms[transform_key](hsv_icon, transform_value)
+            if transform_key not in transform_config:
+                continue
+            transform_value = transform_config[transform_key]
+            hsv_icon, alpha_channel = transform_func(hsv_icon, alpha_channel, transform_value)
         
         r, g, b = hsv_icon.convert("RGB").split()
         sprite_icon = Image.merge("RGBA", (r, g, b, alpha_channel))
         sprite_icon = self._add_dropshadow(sprite_icon)
+        
+        sprite_icon = self._add_indicators(sprite_icon, 
+                                           transform_config.get("indicators",[]))
         
         return sprite_icon
         
@@ -116,8 +149,10 @@ class SpriteGenerator(object):
         Create a shadow (without the image it's shadowing)
         """
         scale_factor = 1.05 #how much larger should shadow be than image?
-        shadow_lightness = 50 #what shade should the shadow be?
-        shadow_channel_threshold = 10 #what is the opacity at which something deserves shadowing?
+        shadow_lightness = 100 #what shade should the shadow be?
+        
+        #what is the opacity at which something deserves shadowing?
+        shadow_channel_threshold = SpriteGenerator.ALPHA_CHANNEL_THRESHOLD
         blur_radius = 5 #how "blurry" should the shadow be?
         
         alpha_channel = sprite_icon.split()[3]
@@ -144,22 +179,88 @@ class SpriteGenerator(object):
         
         
     @staticmethod
-    def _rotate_hue(hsv_icon, rotation_amount):
+    def _rotate_hue(hsv_icon, alpha_channel, rotation_amount):
         HUE, SATURATION, VALUE = 0,1,2
         hsv_channels = hsv_icon.split()
         adapted_hue_channel = hsv_channels[HUE].point(lambda h: (h+rotation_amount+360) % 360)
         
         hsv_channels = adapted_hue_channel, hsv_channels[SATURATION], hsv_channels[VALUE]
         
-        return Image.merge("HSV", hsv_channels)
+        return Image.merge("HSV", hsv_channels), alpha_channel
     
     @staticmethod
-    def _make_grayscale(hsv_icon, is_greyscale):
+    def _set_color(hsv_icon, alpha_channel, hsv_json):
+        """
+        Set the color of "on" pixels using hue/saturation/value
+        """
+        HUE, SATURATION, VALUE = 0,1,2
+        hsv_channels = hsv_icon.split()
+        
+        #Determine which pixels are "on" and which are "off"
+        #using the alpha channel        
+        alpha_mask = [a>SpriteGenerator.ALPHA_CHANNEL_THRESHOLD for a in alpha_channel.getdata()]
+
+        hue_data = [hsv_json["hue"] if is_on else 0 for is_on in alpha_mask]
+        saturation_data = [hsv_json["saturation"] if is_on else 0 for is_on in alpha_mask]
+        value_data = [hsv_json["value"] if is_on else 0 for is_on in alpha_mask]
+
+        hsv_channels[HUE].putdata(hue_data)
+        hsv_channels[SATURATION].putdata(saturation_data)
+        hsv_channels[VALUE].putdata(value_data)
+                
+        result = Image.merge("HSV", hsv_channels)
+        
+        return result, alpha_channel
+    
+    @staticmethod
+    def _set_opacity(hsv_icon, alpha_channel, opacity):
+        opacity_as_int = math.floor(opacity*256)
+        alpha_channel = alpha_channel.point(
+            lambda a: a>SpriteGenerator.ALPHA_CHANNEL_THRESHOLD and opacity_as_int)
+        return hsv_icon, alpha_channel
+    
+    @staticmethod
+    def _make_grayscale(hsv_icon, alpha_channel, is_greyscale):
         if not is_greyscale:
-            return hsv_icon
+            return hsv_icon, alpha_channel
         
         #You can convert between RGB and L/HSV, but not HSV and L
-        return hsv_icon.convert("L").convert("RGB").convert("HSV")
+        return hsv_icon.convert("L").convert("RGB").convert("HSV"), alpha_channel
+    
+    def _add_indicators(self, icon, indicator_list):
+        if not indicator_list:
+            return icon
+        
+        indicator_bar = self.generate_indicator_bar(indicator_list)
+        icon = append_images([icon, indicator_bar], 
+                          "horizontal", 
+                          "top")
+        
+        return icon
+    
+    def generate_indicator_bar(self, indicator_list):
+        icons = []
+        for indicator_name in indicator_list:
+            icon = self._indicators[indicator_name]
+            icons.append(icon)
+            
+        icon = append_images(icons,
+                             "vertical",
+                             "left")
+        
+        return icon
+    
+    def _use_closed_base(self, hsv_icon, alpha_channel, use_closed_base):
+        if not use_closed_base:
+            return hsv_icon, alpha_channel
+        
+        icon = self._closed_base_image.convert("RGBA")
+        alpha_channel = icon.split()[3]
+        
+        hsv_icon = icon.convert("HSV")
+        
+        return hsv_icon, alpha_channel
+        
     
 def _list_files_with_extensions(directory, extensions=None):
     extensions = extensions if extensions is not None else [""]
@@ -179,15 +280,96 @@ def parse_args():
     
     return vars(parser.parse_args())
 
+
+def append_images(images, direction='horizontal', aligment='center'):
+    """
+    Appends images in horizontal/vertical direction.
+
+    Args:
+        images: List of PIL images,
+        direction: direction of concatenation, 'horizontal' or 'vertical'
+        aligment: alignment mode if images need padding;
+           'left', 'right', 'top', 'bottom', or 'center'
+
+    Returns:
+        Concatenated image as a new PIL image object.
+    """
+    #Note: based on https://stackoverflow.com/a/46623632/2540669
+    
+    widths, heights = zip(*(i.size for i in images))
+
+    if direction=='horizontal':
+        new_width = sum(widths)
+        new_height = max(heights)
+    else:
+        new_width = max(widths)
+        new_height = sum(heights)
+
+    new_im = Image.new('RGBA', (new_width, new_height), color=(255,255,255,0))
+
+    offset = 0
+    for im in images:
+        if direction=='horizontal':
+            y = 0
+            if aligment == 'center':
+                y = int((new_height - im.size[1])/2)
+            elif aligment == 'bottom':
+                y = new_height - im.size[1]
+            new_im.paste(im, (offset, y))
+            offset += im.size[0]
+        else:
+            x = 0
+            if aligment == 'center':
+                x = int((new_width - im.size[0])/2)
+            elif aligment == 'right':
+                x = new_width - im.size[0]
+            new_im.paste(im, (x, offset))
+            offset += im.size[1]
+
+    return new_im
+
+def load_indicators_from_directory(base_directory):
+    png_paths = _list_files_with_extensions(base_directory, [".png"])
+    result = {}
+    for png_path in png_paths:
+        image = Image.open(png_path)
+        indicator_name = basename(png_path).replace(".png","")
+        result[indicator_name] = image
+    
+    return result
+
 def main():
+    #indicators created using: http://www.xiconeditor.com/
     parsed_args = parse_args()
     source_dir = parsed_args["directory"]
+    image_definition_json_path = path_join(source_dir, "image_definitions.json")
+    closed_base_path = path_join(source_dir, "x.png")
     
-    generator = SpriteGenerator()
+    try:
+        with open(image_definition_json_path, "r") as f:
+            image_definition_json = json.load(f)
+    except Exception:
+        traceback.print_exc()
+        image_definition_json = None
+        print("Could not read image definition json")
+        #sys.exit()
+        
+    try:
+        closed_base = Image.open(closed_base_path)
+    except Exception:
+        traceback.print_exc()
+        closed_base = None
+        print("Could not read closed base image")
+        #sys.exit()
+        
+    indicator_dir = path_join(source_dir, "_icon_indicators")
+    
+    generator = SpriteGenerator(image_definition_json, 
+                                closed_base, 
+                                excluded_paths=[closed_base_path],
+                                indicators = load_indicators_from_directory(indicator_dir))
+    
     generator.generate_from_directory(source_dir)
-    
-    #test_image = "/home/jrbauer/code/crisiscleanup-web/scss/crisiscleanup/sprites/Debris.png"
-    #generator.generate_from_icon(Image.open(test_image))
     
 
 if __name__=="__main__":
