@@ -9,6 +9,74 @@ from os.path import join as path_join
 
 from PIL import Image, ImageFilter
 
+#how many pixels should be allocated for each icon
+#in a sprite
+SPRITE_ICON_SPACING = 50
+
+#Formula for the position of an icon within a sprite:
+#   icon_left = <column_index>*SPRITE_ICON_SPACING
+#   icon_right = (1 + <column_index>)*SPRITE_ICON_SPACING
+#   icon_top = <row_index>*SPRITE_ICON_SPACING
+#   icon_bottom = (1 + <row_index>)*SPRITE_ICON_SPACING
+#Note that the right and bottom coordinates given are maximums;
+#for a given icon their values may be slightly less.
+
+SPRITE_COLUMNS = [
+    {"claim-status" : "unclaimed", "age" : "new"},
+    {"claim-status" : "unclaimed", "age" : "old1"},
+    {"claim-status" : "unclaimed", "age" : "old2"},
+    {"claim-status" : "unclaimed", "age" : "old3"},
+    {"claim-status" : "unclaimed", "age" : "old4"},
+    {"claim-status" : "unclaimed", "age" : "old5"},
+    {"claim-status" : "claimed", "age" : "new"},
+    {"claim-status" : "claimed", "age" : "old1"},
+    {"claim-status" : "claimed", "age" : "old2"},
+    {"claim-status" : "claimed", "age" : "old3"},
+    {"claim-status" : "claimed", "age" : "old4"},
+    {"claim-status" : "claimed", "age" : "old5"}
+    ]
+
+SPRITE_ROWS = [
+    {"is-multi" : True, "status_string" : "open_unassigned"},
+    {"is-multi" : True, "status_string" : "open_assigned"},
+    {"is-multi" : True, "status_string" : "open_partially_completed"},
+    {"is-multi" : True, "status_string" : "open_partially_needs_follow_up"},
+    {"is-multi" : True, "status_string" : "open_unresponsive"},
+    {"is-multi" : True, "status_string" : "closed_completed"},
+    {"is-multi" : True, "status_string" : "closed_incomplete"},
+    {"is-multi" : True, "status_string" : "closed_out_of_scope"},
+    {"is-multi" : True, "status_string" : "closed_done_by_others"},
+    {"is-multi" : True, "status_string" : "closed_no_help_wanted"},
+    {"is-multi" : True, "status_string" : "closed_rejected"},
+    {"is-multi" : True, "status_string" : "closed_duplicate"},
+    {"is-multi" : True, "status_string" : "closed_marked_for_deletion"},
+    {"is-multi" : False, "status_string" : "open_unassigned"},
+    {"is-multi" : False, "status_string" : "open_assigned"},
+    {"is-multi" : False, "status_string" : "open_partially_completed"},
+    {"is-multi" : False, "status_string" : "open_partially_needs_follow_up"},
+    {"is-multi" : False, "status_string" : "open_unresponsive"},
+    {"is-multi" : False, "status_string" : "closed_completed"},
+    {"is-multi" : False, "status_string" : "closed_incomplete"},
+    {"is-multi" : False, "status_string" : "closed_out_of_scope"},
+    {"is-multi" : False, "status_string" : "closed_done_by_others"},
+    {"is-multi" : False, "status_string" : "closed_no_help_wanted"},
+    {"is-multi" : False, "status_string" : "closed_rejected"},
+    {"is-multi" : False, "status_string" : "closed_duplicate"},
+    {"is-multi" : False, "status_string" : "closed_marked_for_deletion"}
+    ]
+
+def get_icon_class(*dicts):
+    class_dict = {}
+    for d in dicts:
+        class_dict.update(d)
+    
+    icon_class = (class_dict["status_string"] + "-"
+                  + class_dict["claim-status"] + "-"
+                  + class_dict["age"] + "-"
+                  + ("multi" if class_dict["is-multi"] else "single"))
+    
+    return icon_class
+
 class SpriteGenerator(object):
     """
     Object for transforming icons into sprites
@@ -54,6 +122,42 @@ class SpriteGenerator(object):
         for source_icon_path in source_icon_paths:
             sprite_icons = self.generate_from_icon(Image.open(source_icon_path))
             self._write_sprite_directory(sprite_icons, source_icon_path)
+            self._write_sprite(sprite_icons, source_icon_path)
+            
+    def _write_sprite(self, sprite_icons, source_icon_path):
+        """
+        Create a single image file containing icons "quilted" to form sprite
+        
+        Arguments:
+            sprite_icons: A dict from icon class to image object
+            source_icon_path: the full path to the source icon generating 
+                the sprite icons.
+        """
+        rows_as_images = []
+        for row_dict in SPRITE_ROWS:
+            images_in_row = []
+            for column_dict in SPRITE_COLUMNS:
+                icon_class = get_icon_class(row_dict, column_dict)
+                icon = sprite_icons[icon_class]
+                images_in_row.append(icon)
+            row_image = append_images(images_in_row,
+                                      "horizontal", 
+                                      "top", 
+                                      image_extent=SPRITE_ICON_SPACING)
+            rows_as_images.append(row_image)
+        
+        sprite = append_images(rows_as_images,
+                      "vertical",
+                      "left",
+                      image_extent=SPRITE_ICON_SPACING)
+        
+        sprite_directory = splitext(source_icon_path)[0]
+        makedirs(sprite_directory, exist_ok=True)
+        
+        source_name = basename(sprite_directory)
+        file_name = path_join(sprite_directory, source_name+"-sprite"+".png")
+        sprite.save(file_name)
+            
     
     def _write_sprite_directory(self, sprite_icons, source_icon_path):
         """
@@ -281,7 +385,7 @@ def parse_args():
     return vars(parser.parse_args())
 
 
-def append_images(images, direction='horizontal', aligment='center', padding_pixels=0):
+def append_images(images, direction='horizontal', aligment='center', padding_pixels=0, image_extent=None):
     """
     Appends images in horizontal/vertical direction.
 
@@ -289,7 +393,14 @@ def append_images(images, direction='horizontal', aligment='center', padding_pix
         images: List of PIL images,
         direction: direction of concatenation, 'horizontal' or 'vertical'
         aligment: alignment mode if images need padding;
-           'left', 'right', 'top', 'bottom', or 'center'
+           'left', 'right', 'top', 'bottom', or 'center',
+        padding_pixels: how many pixels to insert between images.
+            Cannot be used with image_extent
+        image_extent:
+            The width that horizontal images will be alloted,
+            or the height that vertical images will be alloted.
+            Cannot be used with padding_pixels
+        
 
     Returns:
         Concatenated image as a new PIL image object.
@@ -299,11 +410,17 @@ def append_images(images, direction='horizontal', aligment='center', padding_pix
     widths, heights = zip(*(i.size for i in images))
 
     if direction=='horizontal':
-        new_width = sum(widths)+padding_pixels*(len(images)-1)
+        if image_extent is None:
+            new_width = sum(widths)+padding_pixels*(len(images)-1)
+        else:
+            new_width = len(images)*image_extent
         new_height = max(heights)
     else:
         new_width = max(widths)
-        new_height = sum(heights)+padding_pixels*(len(images)-1)
+        if image_extent is None:
+            new_height = sum(heights)+padding_pixels*(len(images)-1)
+        else:
+            new_height = len(images)*image_extent
 
     new_im = Image.new('RGBA', (new_width, new_height), color=(255,255,255,0))
 
@@ -316,7 +433,7 @@ def append_images(images, direction='horizontal', aligment='center', padding_pix
             elif aligment == 'bottom':
                 y = new_height - im.size[1]
             new_im.paste(im, (offset, y))
-            offset += im.size[0]+padding_pixels
+            offset += im.size[0]+padding_pixels if image_extent is None else image_extent
         else:
             x = 0
             if aligment == 'center':
@@ -324,7 +441,7 @@ def append_images(images, direction='horizontal', aligment='center', padding_pix
             elif aligment == 'right':
                 x = new_width - im.size[0]
             new_im.paste(im, (x, offset))
-            offset += im.size[1]+padding_pixels
+            offset += im.size[1]+padding_pixels if image_extent is None else image_extent
 
     return new_im
 
@@ -352,7 +469,7 @@ def main():
         traceback.print_exc()
         image_definition_json = None
         print("Could not read image definition json")
-        #sys.exit()
+        sys.exit()
         
     try:
         closed_base = Image.open(closed_base_path)
@@ -360,7 +477,7 @@ def main():
         traceback.print_exc()
         closed_base = None
         print("Could not read closed base image")
-        #sys.exit()
+        sys.exit()
         
     indicator_dir = path_join(source_dir, "_icon_indicators")
     
