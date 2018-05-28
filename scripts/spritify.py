@@ -245,7 +245,8 @@ class SpriteGenerator(object):
             
         icon = append_images(icons,
                              "vertical",
-                             "left")
+                             "left",
+                             padding_pixels=2)
         
         return icon
     
@@ -280,7 +281,7 @@ def parse_args():
     return vars(parser.parse_args())
 
 
-def append_images(images, direction='horizontal', aligment='center'):
+def append_images(images, direction='horizontal', aligment='center', padding_pixels=0):
     """
     Appends images in horizontal/vertical direction.
 
@@ -298,11 +299,11 @@ def append_images(images, direction='horizontal', aligment='center'):
     widths, heights = zip(*(i.size for i in images))
 
     if direction=='horizontal':
-        new_width = sum(widths)
+        new_width = sum(widths)+padding_pixels*(len(images)-1)
         new_height = max(heights)
     else:
         new_width = max(widths)
-        new_height = sum(heights)
+        new_height = sum(heights)+padding_pixels*(len(images)-1)
 
     new_im = Image.new('RGBA', (new_width, new_height), color=(255,255,255,0))
 
@@ -315,7 +316,7 @@ def append_images(images, direction='horizontal', aligment='center'):
             elif aligment == 'bottom':
                 y = new_height - im.size[1]
             new_im.paste(im, (offset, y))
-            offset += im.size[0]
+            offset += im.size[0]+padding_pixels
         else:
             x = 0
             if aligment == 'center':
@@ -323,7 +324,7 @@ def append_images(images, direction='horizontal', aligment='center'):
             elif aligment == 'right':
                 x = new_width - im.size[0]
             new_im.paste(im, (x, offset))
-            offset += im.size[1]
+            offset += im.size[1]+padding_pixels
 
     return new_im
 
