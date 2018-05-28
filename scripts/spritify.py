@@ -214,9 +214,8 @@ class SpriteGenerator(object):
     
     @staticmethod
     def _set_opacity(hsv_icon, alpha_channel, opacity):
-        opacity_as_int = math.floor(opacity*256)
         alpha_channel = alpha_channel.point(
-            lambda a: a>SpriteGenerator.ALPHA_CHANNEL_THRESHOLD and opacity_as_int)
+            lambda a: int(math.floor(a*opacity)))
         return hsv_icon, alpha_channel
     
     @staticmethod
