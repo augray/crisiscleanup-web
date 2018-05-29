@@ -37,19 +37,6 @@ SPRITE_COLUMNS = [
     ]
 
 SPRITE_ROWS = [
-    {"is-multi" : True, "status_string" : "open_unassigned"},
-    {"is-multi" : True, "status_string" : "open_assigned"},
-    {"is-multi" : True, "status_string" : "open_partially_completed"},
-    {"is-multi" : True, "status_string" : "open_partially_needs_follow_up"},
-    {"is-multi" : True, "status_string" : "open_unresponsive"},
-    {"is-multi" : True, "status_string" : "closed_completed"},
-    {"is-multi" : True, "status_string" : "closed_incomplete"},
-    {"is-multi" : True, "status_string" : "closed_out_of_scope"},
-    {"is-multi" : True, "status_string" : "closed_done_by_others"},
-    {"is-multi" : True, "status_string" : "closed_no_help_wanted"},
-    {"is-multi" : True, "status_string" : "closed_rejected"},
-    {"is-multi" : True, "status_string" : "closed_duplicate"},
-    {"is-multi" : True, "status_string" : "closed_marked_for_deletion"},
     {"is-multi" : False, "status_string" : "open_unassigned"},
     {"is-multi" : False, "status_string" : "open_assigned"},
     {"is-multi" : False, "status_string" : "open_partially_completed"},
@@ -62,7 +49,20 @@ SPRITE_ROWS = [
     {"is-multi" : False, "status_string" : "closed_no_help_wanted"},
     {"is-multi" : False, "status_string" : "closed_rejected"},
     {"is-multi" : False, "status_string" : "closed_duplicate"},
-    {"is-multi" : False, "status_string" : "closed_marked_for_deletion"}
+    {"is-multi" : False, "status_string" : "closed_marked_for_deletion"},
+    {"is-multi" : True, "status_string" : "open_unassigned"},
+    {"is-multi" : True, "status_string" : "open_assigned"},
+    {"is-multi" : True, "status_string" : "open_partially_completed"},
+    {"is-multi" : True, "status_string" : "open_partially_needs_follow_up"},
+    {"is-multi" : True, "status_string" : "open_unresponsive"},
+    {"is-multi" : True, "status_string" : "closed_completed"},
+    {"is-multi" : True, "status_string" : "closed_incomplete"},
+    {"is-multi" : True, "status_string" : "closed_out_of_scope"},
+    {"is-multi" : True, "status_string" : "closed_done_by_others"},
+    {"is-multi" : True, "status_string" : "closed_no_help_wanted"},
+    {"is-multi" : True, "status_string" : "closed_rejected"},
+    {"is-multi" : True, "status_string" : "closed_duplicate"},
+    {"is-multi" : True, "status_string" : "closed_marked_for_deletion"}
     ]
 
 def get_icon_class(*dicts):
@@ -89,7 +89,7 @@ class SpriteGenerator(object):
     color as all other "on" pixels, or transparent.
     We try to bin pixels into one of these two 
     categories by looking at the value of the alpha
-    channel, and this is the magnitide at which a pixel
+    channel, and this is the magnitude at which a pixel
     is considered "on"
     """
     ALPHA_CHANNEL_THRESHOLD = 75
@@ -99,6 +99,7 @@ class SpriteGenerator(object):
         self._closed_base_image = closed_base_image
         self._excluded_paths = set(kwargs.get("excluded_paths", []))
         self._indicators = kwargs["indicators"]
+        self._overlays = kwargs["overlays"]
     
     def _convert_to_hsv_alpha(self, indicator):
         r, g, b, a = indicator.convert("RGBA").split()
@@ -116,15 +117,20 @@ class SpriteGenerator(object):
     
     def generate_from_directory(self, source_directory):
         """
-        Apply the transformation on any icons not possesing sprites
+        Apply the transformation on all icons
         """
         source_icon_paths = self._get_icons_to_transform(source_directory)
         for source_icon_path in source_icon_paths:
-            sprite_icons = self.generate_from_icon(Image.open(source_icon_path))
+            sprite_icons = self.generate_from_icon(Image.open(source_icon_path), 
+                                                   apply_colorblind_transforms = False)
             self._write_sprite_directory(sprite_icons, source_icon_path)
             self._write_sprite(sprite_icons, source_icon_path)
             
-    def _write_sprite(self, sprite_icons, source_icon_path):
+            colorblind_sprite_icons = self.generate_from_icon(Image.open(source_icon_path),
+                                                   apply_colorblind_transforms = True)
+            self._write_sprite(colorblind_sprite_icons, source_icon_path, suffix="-colorblind")
+            
+    def _write_sprite(self, sprite_icons, source_icon_path, suffix=""):
         """
         Create a single image file containing icons "quilted" to form sprite
         
@@ -132,6 +138,7 @@ class SpriteGenerator(object):
             sprite_icons: A dict from icon class to image object
             source_icon_path: the full path to the source icon generating 
                 the sprite icons.
+            suffix: Will be appended to the image name of the sprite.
         """
         rows_as_images = []
         for row_dict in SPRITE_ROWS:
@@ -155,7 +162,7 @@ class SpriteGenerator(object):
         makedirs(sprite_directory, exist_ok=True)
         
         source_name = basename(sprite_directory)
-        file_name = path_join(sprite_directory, source_name+"-sprite"+".png")
+        file_name = path_join(sprite_directory, source_name+"-sprite"+suffix+".png")
         sprite.save(file_name)
             
     
@@ -181,7 +188,7 @@ class SpriteGenerator(object):
                 print("cannot convert icon '{}' with icon class '{}'".format(source_name,icon_class))
 
     
-    def generate_from_icon(self, icon):
+    def generate_from_icon(self, icon, apply_colorblind_transforms = False):
         """
         Create a sprite for an icon located at the specified path
         """
@@ -192,7 +199,10 @@ class SpriteGenerator(object):
         transform_configs = self._get_transform_configs()
         sprite_icons = {}
         for sprite_icon_class, transform_config in transform_configs.items():
-            sprite_icon = self._apply_transforms(hsv_icon, alpha_channel, transform_config)
+            sprite_icon = self._apply_transforms(hsv_icon, 
+                                                 alpha_channel, 
+                                                 transform_config,
+                                                 apply_colorblind_transforms)
             sprite_icons[sprite_icon_class] = sprite_icon
         
         return sprite_icons
@@ -208,7 +218,7 @@ class SpriteGenerator(object):
         """
         return self._image_definition_json
     
-    def _apply_transforms(self, hsv_icon, alpha_channel, transform_config):
+    def _apply_transforms(self, hsv_icon, alpha_channel, transform_config, apply_colorblind_transforms = False):
         """
         For a given set of icon transforms, apply them and produce result
         
@@ -234,9 +244,13 @@ class SpriteGenerator(object):
         sprite_icon = Image.merge("RGBA", (r, g, b, alpha_channel))
         sprite_icon = self._add_dropshadow(sprite_icon)
         
-        sprite_icon = self._add_indicators(sprite_icon, 
-                                           transform_config.get("indicators",[]))
-        
+        if apply_colorblind_transforms:
+            sprite_icon = self._add_colorblind_indicators(sprite_icon, 
+                                           transform_config.get("colorblind-indicators",[]))
+        else:
+            sprite_icon = self._add_overlays(sprite_icon,
+                                             transform_config.get("overlays",[]))
+            
         return sprite_icon
         
     @staticmethod
@@ -337,7 +351,16 @@ class SpriteGenerator(object):
         #You can convert between RGB and L/HSV, but not HSV and L
         return hsv_icon.convert("L").convert("RGB").convert("HSV"), alpha_channel
     
-    def _add_indicators(self, icon, indicator_list):
+    def _add_colorblind_indicators(self, icon, indicator_list):
+        """
+        Add a bar of tiny indicators to the right of the icons
+        this will be used for an alternate sprite (one designed
+        specifically for the colorblind)
+        Arguments:
+            icon: the icon, in RGBA format
+            indicator_list: A list of strings, each string 
+                identifying an indicator
+        """
         if not indicator_list:
             return icon
         
@@ -347,6 +370,22 @@ class SpriteGenerator(object):
                           "top")
         
         return icon
+    
+    def _add_overlays(self, icon, overlay_list):
+        for overlay_string in overlay_list:
+            overlay = self._overlays[overlay_string]
+            overlay = self._pad_image(overlay, icon.size)
+            icon = Image.alpha_composite(icon, overlay)
+        return icon
+    
+    @staticmethod
+    def _pad_image(image, to_size):
+        width, height = to_size
+        current_width, current_height = image.size
+        new_image = Image.new('RGBA', (max(width, current_width), max(height, current_height)), color=(255,255,255,0))
+        new_image.paste(image, (0, 0))
+        
+        return new_image.crop((0, 0, width, height))
     
     def generate_indicator_bar(self, indicator_list):
         icons = []
@@ -487,16 +526,15 @@ def main():
         sys.exit()
         
     indicator_dir = path_join(source_dir, "_icon_indicators")
+    overlay_dir = path_join(source_dir, "_overlays")
     
     generator = SpriteGenerator(image_definition_json, 
                                 closed_base, 
                                 excluded_paths=[closed_base_path],
-                                indicators = load_indicators_from_directory(indicator_dir))
+                                indicators = load_indicators_from_directory(indicator_dir),
+                                overlays = load_indicators_from_directory(overlay_dir))
     
     generator.generate_from_directory(source_dir)
-    #icon = Image.open("/home/jrbauer/code/crisiscleanup-web/scss/crisiscleanup/sprites/Landslide.png")
-    #result = generator._create_shadow(icon)
-    #result.show()
 
 if __name__=="__main__":
     main()
