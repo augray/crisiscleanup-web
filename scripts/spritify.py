@@ -252,12 +252,13 @@ class SpriteGenerator(object):
         """
         Create a shadow (without the image it's shadowing)
         """
-        scale_factor = 1.05 #how much larger should shadow be than image?
-        shadow_lightness = 100 #what shade should the shadow be?
+        shadow_lightness = 0 #what shade should the shadow be?
         
         #what is the opacity at which something deserves shadowing?
         shadow_channel_threshold = SpriteGenerator.ALPHA_CHANNEL_THRESHOLD
-        blur_radius = 5 #how "blurry" should the shadow be?
+        blur_radius = 2 #how "blurry" should the shadow be?
+        
+        shadow_offset = 1
         
         alpha_channel = sprite_icon.split()[3]
         
@@ -267,16 +268,15 @@ class SpriteGenerator(object):
         
         #A version of the icon that is completely black
         grayscale_icon = Image.merge("RGBA", (shadow_channel, shadow_channel, shadow_channel, alpha_channel))
+        width, height = grayscale_icon.size
         
-        #create the shadow from a larger version of icon
-        size_x, size_y = grayscale_icon.size
-        shadow = grayscale_icon.resize((int(scale_factor*size_x), int(scale_factor*size_y)))
-        
-        shadow = shadow.filter(ImageFilter.GaussianBlur(blur_radius))
+        offset_icon = Image.new('RGBA', (width + shadow_offset, height + shadow_offset), color=(255,255,255,0))
+        offset_icon.paste(grayscale_icon, (shadow_offset, shadow_offset))
+                
+        shadow = offset_icon.filter(ImageFilter.GaussianBlur(blur_radius))
         
         #crop to original size
-        crop_offset_x, crop_offset_y = (scale_factor-1)*size_x/2, (scale_factor-1)*size_y/2
-        crop_box = (crop_offset_x, crop_offset_y, crop_offset_x+size_x, crop_offset_y+size_y)
+        crop_box = (0, 0, width, height)
         shadow = shadow.crop(crop_box)
         
         return shadow
@@ -305,13 +305,20 @@ class SpriteGenerator(object):
         alpha_mask = [a>SpriteGenerator.ALPHA_CHANNEL_THRESHOLD for a in alpha_channel.getdata()]
 
         hue_data = [hsv_json["hue"] if is_on else 0 for is_on in alpha_mask]
-        saturation_data = [hsv_json["saturation"] if is_on else 0 for is_on in alpha_mask]
-        value_data = [hsv_json["value"] if is_on else 0 for is_on in alpha_mask]
-
+        if "saturation-multiplier" in hsv_json:
+            saturation_transform = lambda s: int(max(0, min(255, hsv_json["saturation-multiplier"]*s)))
+        else:
+            saturation_transform = lambda s: s
+        if "value-multiplier" in hsv_json:
+            value_transform = lambda v: int(max(0, min(255, hsv_json["value-multiplier"]*v)))
+        else:
+            value_transform = lambda v: v
+        
         hsv_channels[HUE].putdata(hue_data)
-        hsv_channels[SATURATION].putdata(saturation_data)
-        hsv_channels[VALUE].putdata(value_data)
-                
+        saturation_channel = hsv_channels[SATURATION].point(saturation_transform)
+        value_channel = hsv_channels[VALUE].point(value_transform)
+        
+        hsv_channels = (hsv_channels[HUE], saturation_channel, value_channel)
         result = Image.merge("HSV", hsv_channels)
         
         return result, alpha_channel
@@ -487,7 +494,9 @@ def main():
                                 indicators = load_indicators_from_directory(indicator_dir))
     
     generator.generate_from_directory(source_dir)
-    
+    #icon = Image.open("/home/jrbauer/code/crisiscleanup-web/scss/crisiscleanup/sprites/Landslide.png")
+    #result = generator._create_shadow(icon)
+    #result.show()
 
 if __name__=="__main__":
     main()
