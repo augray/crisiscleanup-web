@@ -2,8 +2,8 @@
     "open_unassigned-claimed-new-single": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -16,8 +16,8 @@
     "open_assigned-claimed-new-single": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -30,8 +30,8 @@
     "open_partially_completed-claimed-new-single": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -73,7 +73,7 @@
     "closed_completed-claimed-new-single": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -137,9 +137,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 1.0, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_rejected-claimed-new-single": {
@@ -151,9 +149,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 1.0, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_duplicate-claimed-new-single": {
@@ -165,9 +161,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 1.0, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-new-single": {
@@ -179,16 +173,14 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 1.0, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "open_unassigned-claimed-old1-single": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -201,8 +193,8 @@
     "open_assigned-claimed-old1-single": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -215,8 +207,8 @@
     "open_partially_completed-claimed-old1-single": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -258,7 +250,7 @@
     "closed_completed-claimed-old1-single": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -322,9 +314,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.75, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_rejected-claimed-old1-single": {
@@ -336,9 +326,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.75, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_duplicate-claimed-old1-single": {
@@ -350,9 +338,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.75, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-old1-single": {
@@ -364,16 +350,14 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.75, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "open_unassigned-claimed-old2-single": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -386,8 +370,8 @@
     "open_assigned-claimed-old2-single": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -400,8 +384,8 @@
     "open_partially_completed-claimed-old2-single": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -443,7 +427,7 @@
     "closed_completed-claimed-old2-single": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -507,9 +491,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.6, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_rejected-claimed-old2-single": {
@@ -521,9 +503,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.6, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_duplicate-claimed-old2-single": {
@@ -535,9 +515,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.6, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-old2-single": {
@@ -549,16 +527,14 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.6, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "open_unassigned-claimed-old3-single": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -571,8 +547,8 @@
     "open_assigned-claimed-old3-single": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -585,8 +561,8 @@
     "open_partially_completed-claimed-old3-single": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -628,7 +604,7 @@
     "closed_completed-claimed-old3-single": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -692,9 +668,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.35, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_rejected-claimed-old3-single": {
@@ -706,9 +680,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.35, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_duplicate-claimed-old3-single": {
@@ -720,9 +692,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.35, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-old3-single": {
@@ -734,16 +704,14 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.35, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "open_unassigned-claimed-old4-single": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -756,8 +724,8 @@
     "open_assigned-claimed-old4-single": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -770,8 +738,8 @@
     "open_partially_completed-claimed-old4-single": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -813,7 +781,7 @@
     "closed_completed-claimed-old4-single": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -877,9 +845,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.2, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_rejected-claimed-old4-single": {
@@ -891,9 +857,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.2, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_duplicate-claimed-old4-single": {
@@ -905,9 +869,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.2, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-old4-single": {
@@ -919,16 +881,14 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.2, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "open_unassigned-claimed-old5-single": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -941,8 +901,8 @@
     "open_assigned-claimed-old5-single": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -955,8 +915,8 @@
     "open_partially_completed-claimed-old5-single": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -998,7 +958,7 @@
     "closed_completed-claimed-old5-single": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -1062,9 +1022,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.1, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_rejected-claimed-old5-single": {
@@ -1076,9 +1034,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.1, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_duplicate-claimed-old5-single": {
@@ -1090,9 +1046,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.1, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-old5-single": {
@@ -1104,9 +1058,7 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.1, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
+        "colorblind-indicators": [], 
         "overlays": []
     }, 
     "open_unassigned-unclaimed-new-single": {
@@ -1173,8 +1125,8 @@
     }, 
     "closed_completed-unclaimed-new-single": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -1213,7 +1165,7 @@
     }, 
     "closed_done_by_others-unclaimed-new-single": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -1335,8 +1287,8 @@
     }, 
     "closed_completed-unclaimed-old1-single": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -1375,7 +1327,7 @@
     }, 
     "closed_done_by_others-unclaimed-old1-single": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -1497,8 +1449,8 @@
     }, 
     "closed_completed-unclaimed-old2-single": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -1537,7 +1489,7 @@
     }, 
     "closed_done_by_others-unclaimed-old2-single": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -1659,8 +1611,8 @@
     }, 
     "closed_completed-unclaimed-old3-single": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -1699,7 +1651,7 @@
     }, 
     "closed_done_by_others-unclaimed-old3-single": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -1821,8 +1773,8 @@
     }, 
     "closed_completed-unclaimed-old4-single": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -1861,7 +1813,7 @@
     }, 
     "closed_done_by_others-unclaimed-old4-single": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -1983,8 +1935,8 @@
     }, 
     "closed_completed-unclaimed-old5-single": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -2023,7 +1975,7 @@
     }, 
     "closed_done_by_others-unclaimed-old5-single": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -2084,8 +2036,8 @@
     "open_unassigned-claimed-new-multi": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2101,8 +2053,8 @@
     "open_assigned-claimed-new-multi": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2118,8 +2070,8 @@
     "open_partially_completed-claimed-new-multi": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2170,7 +2122,7 @@
     "closed_completed-claimed-new-multi": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -2246,12 +2198,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 1.0, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_rejected-claimed-new-multi": {
         "color": {
@@ -2262,12 +2210,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 1.0, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_duplicate-claimed-new-multi": {
         "color": {
@@ -2278,12 +2222,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 1.0, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-new-multi": {
         "color": {
@@ -2294,18 +2234,14 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 1.0, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "open_unassigned-claimed-old1-multi": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2321,8 +2257,8 @@
     "open_assigned-claimed-old1-multi": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2338,8 +2274,8 @@
     "open_partially_completed-claimed-old1-multi": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2390,7 +2326,7 @@
     "closed_completed-claimed-old1-multi": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -2466,12 +2402,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.75, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_rejected-claimed-old1-multi": {
         "color": {
@@ -2482,12 +2414,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.75, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_duplicate-claimed-old1-multi": {
         "color": {
@@ -2498,12 +2426,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.75, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-old1-multi": {
         "color": {
@@ -2514,18 +2438,14 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.75, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "open_unassigned-claimed-old2-multi": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2541,8 +2461,8 @@
     "open_assigned-claimed-old2-multi": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2558,8 +2478,8 @@
     "open_partially_completed-claimed-old2-multi": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2610,7 +2530,7 @@
     "closed_completed-claimed-old2-multi": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -2686,12 +2606,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.6, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_rejected-claimed-old2-multi": {
         "color": {
@@ -2702,12 +2618,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.6, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_duplicate-claimed-old2-multi": {
         "color": {
@@ -2718,12 +2630,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.6, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-old2-multi": {
         "color": {
@@ -2734,18 +2642,14 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.6, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "open_unassigned-claimed-old3-multi": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2761,8 +2665,8 @@
     "open_assigned-claimed-old3-multi": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2778,8 +2682,8 @@
     "open_partially_completed-claimed-old3-multi": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2830,7 +2734,7 @@
     "closed_completed-claimed-old3-multi": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -2906,12 +2810,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.35, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_rejected-claimed-old3-multi": {
         "color": {
@@ -2922,12 +2822,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.35, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_duplicate-claimed-old3-multi": {
         "color": {
@@ -2938,12 +2834,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.35, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-old3-multi": {
         "color": {
@@ -2954,18 +2846,14 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.35, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "open_unassigned-claimed-old4-multi": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2981,8 +2869,8 @@
     "open_assigned-claimed-old4-multi": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -2998,8 +2886,8 @@
     "open_partially_completed-claimed-old4-multi": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -3050,7 +2938,7 @@
     "closed_completed-claimed-old4-multi": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -3126,12 +3014,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.2, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_rejected-claimed-old4-multi": {
         "color": {
@@ -3142,12 +3026,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.2, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_duplicate-claimed-old4-multi": {
         "color": {
@@ -3158,12 +3038,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.2, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-old4-multi": {
         "color": {
@@ -3174,18 +3050,14 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.2, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "open_unassigned-claimed-old5-multi": {
         "color": {
             "hue": 10, 
-            "value-multiplier": 1.15, 
-            "saturation-multiplier": 0.83
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -3201,8 +3073,8 @@
     "open_assigned-claimed-old5-multi": {
         "color": {
             "hue": 45, 
-            "value-multiplier": 1, 
-            "saturation-multiplier": 1
+            "value-multiplier": 1.5, 
+            "saturation-multiplier": 1.5
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -3218,8 +3090,8 @@
     "open_partially_completed-claimed-old5-multi": {
         "color": {
             "hue": 180, 
-            "value-multiplier": 0.9, 
-            "saturation-multiplier": 0.78
+            "value-multiplier": 1.3, 
+            "saturation-multiplier": 1.3
         }, 
         "use-closed-base": false, 
         "grayscale": false, 
@@ -3270,7 +3142,7 @@
     "closed_completed-claimed-old5-multi": {
         "color": {
             "hue": 90, 
-            "value-multiplier": 0.8, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -3346,12 +3218,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.1, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_rejected-claimed-old5-multi": {
         "color": {
@@ -3362,12 +3230,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.1, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_duplicate-claimed-old5-multi": {
         "color": {
@@ -3378,12 +3242,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.1, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "closed_marked_for_deletion-claimed-old5-multi": {
         "color": {
@@ -3394,12 +3254,8 @@
         "use-closed-base": true, 
         "grayscale": false, 
         "opacity": 0.1, 
-        "colorblind-indicators": [
-            "claimed-unassigned"
-        ], 
-        "overlays": [
-            "multi"
-        ]
+        "colorblind-indicators": [], 
+        "overlays": []
     }, 
     "open_unassigned-unclaimed-new-multi": {
         "color": {
@@ -3484,8 +3340,8 @@
     }, 
     "closed_completed-unclaimed-new-multi": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -3534,7 +3390,7 @@
     }, 
     "closed_done_by_others-unclaimed-new-multi": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -3558,9 +3414,7 @@
         "grayscale": false, 
         "opacity": 1.0, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_rejected-unclaimed-new-multi": {
         "color": {
@@ -3572,9 +3426,7 @@
         "grayscale": false, 
         "opacity": 1.0, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_duplicate-unclaimed-new-multi": {
         "color": {
@@ -3586,9 +3438,7 @@
         "grayscale": false, 
         "opacity": 1.0, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_marked_for_deletion-unclaimed-new-multi": {
         "color": {
@@ -3600,9 +3450,7 @@
         "grayscale": false, 
         "opacity": 1.0, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "open_unassigned-unclaimed-old1-multi": {
         "color": {
@@ -3687,8 +3535,8 @@
     }, 
     "closed_completed-unclaimed-old1-multi": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -3737,7 +3585,7 @@
     }, 
     "closed_done_by_others-unclaimed-old1-multi": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -3761,9 +3609,7 @@
         "grayscale": false, 
         "opacity": 0.75, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_rejected-unclaimed-old1-multi": {
         "color": {
@@ -3775,9 +3621,7 @@
         "grayscale": false, 
         "opacity": 0.75, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_duplicate-unclaimed-old1-multi": {
         "color": {
@@ -3789,9 +3633,7 @@
         "grayscale": false, 
         "opacity": 0.75, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_marked_for_deletion-unclaimed-old1-multi": {
         "color": {
@@ -3803,9 +3645,7 @@
         "grayscale": false, 
         "opacity": 0.75, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "open_unassigned-unclaimed-old2-multi": {
         "color": {
@@ -3890,8 +3730,8 @@
     }, 
     "closed_completed-unclaimed-old2-multi": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -3940,7 +3780,7 @@
     }, 
     "closed_done_by_others-unclaimed-old2-multi": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -3964,9 +3804,7 @@
         "grayscale": false, 
         "opacity": 0.6, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_rejected-unclaimed-old2-multi": {
         "color": {
@@ -3978,9 +3816,7 @@
         "grayscale": false, 
         "opacity": 0.6, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_duplicate-unclaimed-old2-multi": {
         "color": {
@@ -3992,9 +3828,7 @@
         "grayscale": false, 
         "opacity": 0.6, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_marked_for_deletion-unclaimed-old2-multi": {
         "color": {
@@ -4006,9 +3840,7 @@
         "grayscale": false, 
         "opacity": 0.6, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "open_unassigned-unclaimed-old3-multi": {
         "color": {
@@ -4093,8 +3925,8 @@
     }, 
     "closed_completed-unclaimed-old3-multi": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -4143,7 +3975,7 @@
     }, 
     "closed_done_by_others-unclaimed-old3-multi": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -4167,9 +3999,7 @@
         "grayscale": false, 
         "opacity": 0.35, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_rejected-unclaimed-old3-multi": {
         "color": {
@@ -4181,9 +4011,7 @@
         "grayscale": false, 
         "opacity": 0.35, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_duplicate-unclaimed-old3-multi": {
         "color": {
@@ -4195,9 +4023,7 @@
         "grayscale": false, 
         "opacity": 0.35, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_marked_for_deletion-unclaimed-old3-multi": {
         "color": {
@@ -4209,9 +4035,7 @@
         "grayscale": false, 
         "opacity": 0.35, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "open_unassigned-unclaimed-old4-multi": {
         "color": {
@@ -4296,8 +4120,8 @@
     }, 
     "closed_completed-unclaimed-old4-multi": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -4346,7 +4170,7 @@
     }, 
     "closed_done_by_others-unclaimed-old4-multi": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -4370,9 +4194,7 @@
         "grayscale": false, 
         "opacity": 0.2, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_rejected-unclaimed-old4-multi": {
         "color": {
@@ -4384,9 +4206,7 @@
         "grayscale": false, 
         "opacity": 0.2, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_duplicate-unclaimed-old4-multi": {
         "color": {
@@ -4398,9 +4218,7 @@
         "grayscale": false, 
         "opacity": 0.2, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_marked_for_deletion-unclaimed-old4-multi": {
         "color": {
@@ -4412,9 +4230,7 @@
         "grayscale": false, 
         "opacity": 0.2, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "open_unassigned-unclaimed-old5-multi": {
         "color": {
@@ -4499,8 +4315,8 @@
     }, 
     "closed_completed-unclaimed-old5-multi": {
         "color": {
-            "hue": 236, 
-            "value-multiplier": 0.85, 
+            "hue": 90, 
+            "value-multiplier": 1, 
             "saturation-multiplier": 1
         }, 
         "use-closed-base": false, 
@@ -4549,7 +4365,7 @@
     }, 
     "closed_done_by_others-unclaimed-old5-multi": {
         "color": {
-            "hue": 136, 
+            "hue": 90, 
             "value-multiplier": 0.65, 
             "saturation-multiplier": 1
         }, 
@@ -4573,9 +4389,7 @@
         "grayscale": false, 
         "opacity": 0.1, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_rejected-unclaimed-old5-multi": {
         "color": {
@@ -4587,9 +4401,7 @@
         "grayscale": false, 
         "opacity": 0.1, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_duplicate-unclaimed-old5-multi": {
         "color": {
@@ -4601,9 +4413,7 @@
         "grayscale": false, 
         "opacity": 0.1, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }, 
     "closed_marked_for_deletion-unclaimed-old5-multi": {
         "color": {
@@ -4615,8 +4425,6 @@
         "grayscale": false, 
         "opacity": 0.1, 
         "colorblind-indicators": [], 
-        "overlays": [
-            "multi"
-        ]
+        "overlays": []
     }
 }
